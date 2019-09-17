@@ -1,0 +1,23 @@
+.optionBar{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width :180px;
+  height:400px;
+
+}
+.optionBar #ob1{
+  position: absolute;
+  background:rgba(132, 201, 243, 0.33);
+  width :180px;
+  height:30px;
+}
+.optionBar #ob2{
+  display: block;
+  top: 30px;
+  position: absolute;
+  background:yellow;
+  width :180px;
+  height:100%;
+  max-height:92.5%;
+}
