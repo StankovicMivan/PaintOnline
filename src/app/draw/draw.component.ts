@@ -15,43 +15,14 @@ export class DrawComponent implements OnInit {
 
   ngOnInit() {
     optionBar();
-    const canvas = <HTMLCanvasElement> document.getElementById('my');
 
-    var coords = [];
-    var mousePosition;
-    var offset = [0, 0];
-    var context = canvas.getContext('2d');
-    canvas.addEventListener('click', function(event) {
-
-
-      var coord = {'x': event.clientX, 'y': event.clientY};
-
-      document.getElementById('coords').innerText = '{' + coord.x + ', ' + coord.y + '}';
-      coords.push(coord);
-      var max = coords.length - 1;
-      if (typeof coords[max - 1] !== 'undefined') {
-        mousePosition = {
-
-          x: event.clientX,
-          y: event.clientY
-
-        };
-        var curr = coords[max], prev = coords[max - 1];
-        context.beginPath();
-        context.moveTo(prev.x-8, prev.y-100);
-        context.lineTo(mousePosition.x-8, mousePosition.y-100);
-
-        context.stroke();
-      }
-
-    });
 
     function optionBar() {
 
-      var mousePosition;
-      var offset = [0, 0];
-      var div;
-      var isDown = false;
+      let mousePosition;
+      let offset = [0, 0];
+      let div;
+      let isDown = false;
 
       div = document.getElementById('ob');
 
@@ -82,12 +53,62 @@ export class DrawComponent implements OnInit {
       }, true);
     }
 
-
   }
 
 
+
+  cursor() {
+    let button;
+    let mousePosition;
+    button = document.getElementById('cursor');
+    const canvas = document.getElementById('my') as HTMLCanvasElement;
+    let context = canvas.getContext('2d');
+    canvas.addEventListener('click', function(event) {
+      context.beginPath();
+      // context.rect("500","500","200","100");
+      context.strokeRect(event.clientX-8,event.clientY-70,"200","100");
+    });
+    alert("selected");
+    // button.classList.add("btn-disable");
+
+  }
+  drawline() {
+    const canvas = document.getElementById('my') as HTMLCanvasElement;
+
+    let coords = [];
+    let mousePosition;
+    let offset = [0, 0];
+    let context = canvas.getContext('2d');
+    canvas.addEventListener('click', function(event) {
+
+
+      let coord = {x: event.clientX, y: event.clientY};
+
+      // document.getElementById('coords').innerText = '{' + coord.x + ', ' + coord.y + '}';
+      coords.push(coord);
+      let max = coords.length - 1;
+      if (typeof coords[max - 1] !== 'undefined') {
+        mousePosition = {
+
+          x: event.clientX,
+          y: event.clientY
+
+        };
+        let curr = coords[max], prev = coords[max - 1];
+        context.beginPath();
+        context.moveTo(prev.x - 8, prev.y - 70);
+        context.lineTo(mousePosition.x - 8, mousePosition.y - 70);
+
+        context.stroke();
+        return context;
+
+      }
+
+    });
+  }
+
   minimize() {
-    var div, div2;
+    let div, div2;
 
     div = document.getElementById('ob2');
     div2 = document.getElementById('ob');

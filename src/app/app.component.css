@@ -1,0 +1,10 @@
+ .drawView {
+  width:1920px;
+  height:1080px;
+}
+ body {
+   background: #c2c3c4;
+ }
+ canvas {
+   background: #333333;
+ }

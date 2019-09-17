@@ -5,10 +5,21 @@
     <span (click)="minimize()"  >min</span>
   </span>
   <span id="ob2">
-    <button id="cursor"></button>
+    <div>
+      <button id="cursor" (click)="cursor()"></button>
+      <button id="line" (click)="drawline()"></button>
+    </div>
+    <div>
+        <button id="circle"></button>
+        <button id="circle"></button>
+    </div>
+
+
+
+
   </span>
 </div>
-<canvas id="my" width="1920" height="1080"></canvas>
+<canvas id="my" class="drawView" width="1920" height="1080"></canvas>
 
 
 
