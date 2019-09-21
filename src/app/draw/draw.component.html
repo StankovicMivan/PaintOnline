@@ -6,20 +6,38 @@
   </span>
   <span id="ob2">
     <div>
-      <button id="cursor" (click)="cursor()"></button>
-      <button id="line" (click)="drawline()"></button>
+      <button id="brush"> <img src="/assets/icons/brush.png"></button>
+      <button id="line" > <img src="/assets/icons/line40x40.png"></button>
     </div>
     <div>
-        <button id="circle"></button>
+        <button id="erase"> <img src="/assets/icons/eraser.png"></button>
         <button id="circle"></button>
     </div>
+    <div>
+      <input type="color" value="#ffff00" name="`myColor" id="myColor">
+     <span> size<input type="range" id="myRange" value="5" min="1" max="100"></span>
 
+    </div>
+
+
+<div><a href="" id="saveLink"><button id="save">Save</button></a>
+  <button id="reset">Reset</button></div>
 
 
 
   </span>
+
 </div>
-<canvas id="my" class="drawView" width="1920" height="1080"></canvas>
+
+<div id="toolbar">
+
+<!--  <div id="range">Size: 1<input type="range" id="myRange" value="5" min="1" max="100">100</div>-->
+
+<!--  <button id="erase"></button>-->
+
+  <br>
+</div>
+<canvas id="canvas" ></canvas>
 
 
 

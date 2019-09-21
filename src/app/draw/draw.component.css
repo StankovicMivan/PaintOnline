@@ -1,3 +1,18 @@
+* {
+  -moz-box-sizing: border-box; /* Firefox */
+  -webkit-box-sizing: border-box; /* Chrome & safari */
+  -ms-box-sizing: border-box; /* IE */
+  box-sizing: border-box;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+body {
+  margin: 0;
+}
+
 .optionBar{
   position: absolute;
   left: 20px;
@@ -16,7 +31,7 @@
   display: block;
   top: 30px;
   position: absolute;
-  background:yellow;
+  background:rgba(20,243,241,0.96);
   width :120px;
   height:100%;
   max-height:92.5%;
@@ -25,28 +40,17 @@
 /*  width:1920pt;*/
 /*  height:1080pt;*/
 /*}*/
-#cursor {
-  color: #1976d2;
-  background-image: url("/assets/icons/cursor40x40.png");
-  /*background: url("/src/app/assets/icons/cursor.png") no-repeat;*/
-  cursor: pointer;
-  color: #eeeeee;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-bottom: 5px;
-  margin-right: 5px;
-  width: 40px;
-  height: 40px;
-}
+
 .btn-disable{
   cursor:not-allowed;
   pointer-events: none;
   color: #c0c0c0;
   background-color:#ffffff;
 }
-#line {
+
+#brush, #erase, #circle, #line {
   cursor: pointer;
-  background-image: url("/assets/icons/line40x40.png");
+  background-color: white;
   margin-top: 10px;
   margin-left: 10px;
   margin-bottom: 5px;
@@ -54,18 +58,70 @@
   width: 40px;
   height: 40px;
 }
-#circle {
+
+canvas {
+ display: block;
+
+}
+
+#toolbar {
+  width: 100%;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  background-color: #2f2f2f;
+  overflow: auto;
+}
+
+#colors {
+  position: relative;
+  float: left;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: Verdana;
+  color: white;
+  white-space: nowrap;
+}
+
+#range {
+  position: relative;
+  float: left;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: Verdana;
+  color: white;
+  white-space: nowrap;
+  margin-right: 20px;
+}
+
+#myColor, #myRange {
   cursor: pointer;
-  margin-top: 5px;
-  margin-left: 10px;
-  margin-bottom: 5px;
-  margin-right: 5px;
-  width: 40px;
-  height: 40px;
 }
 
 
-canvas {
 
+#reset, #save {
+  position: relative;
+  float: right;
+  font-size: 20px;
+  font-family: Verdana;
+  font-weight: 500;
+  background-color: white;
+  color: #4f4f4f;
+  text-align: center;
+  cursor: pointer;
+}
 
+#reset {
+  height: 30px;
+  width: 70px;
+  margin-right: 15px;
+}
+
+#save {
+  height: 30px;
+  width: 63px;
+  margin-right: 10px;
 }
