@@ -28,10 +28,13 @@ export class DrawComponent implements OnInit {
     var brush = document.getElementById("brush"); //Brush
     var eraser = document.getElementById("erase"); //Eraser
     var color = document.getElementById("myColor") as HTMLElement; //Color
-    var size = document.getElementById("myRange"); //Size
+    var color2 = document.getElementById("myColor2") as HTMLElement; //Color
+    var size = document.getElementById("myRange")as HTMLElement; //Size
     var reset = document.getElementById("reset"); //reset
     var saveLink = document.getElementById("saveLink"); //saveLink element
+    var rectangle = document.getElementById("rectangle");
 
+    let rectangleCoordinate =[4];
     var myColor = color.value;
     ctx.strokeStyle = myColor;
 //Set initial size conditions
@@ -40,14 +43,18 @@ export class DrawComponent implements OnInit {
 
     brush.style.border = "2px solid red";
     canvas.style.cursor = "pointer";
-
-    canvas.addEventListener("mousedown", brushDown, false);
-    canvas.addEventListener("mousemove", brushMove, false);
-    canvas.addEventListener("mouseup", brushUp, false);
+    //
+    // canvas.addEventListener("mousedown", brushDown, false);
+    // canvas.addEventListener("mousemove", brushMove, false);
+    // canvas.addEventListener("mouseup", brushUp, false);
 
 //4. Color change conditions
     function colorChange() {
       myColor = color.value;
+      ctx.strokeStyle = myColor;
+    }
+    function colorChange2() {
+      myColor = color2.value;
       ctx.strokeStyle = myColor;
     }
 
@@ -55,6 +62,7 @@ export class DrawComponent implements OnInit {
     function sizeChange() {
       mySize = size.value;
       ctx.lineWidth = mySize;
+
     }
 
 //2.Make brush work
@@ -93,9 +101,61 @@ export class DrawComponent implements OnInit {
       brushDraw(canvas, positionX, positionY);
     }
 
+    function rectangleDown(e){
+      mouse = true;
+      var coordinates = getCoordinates(canvas, e);
+      canvas.style.cursor = "pointer";
+      positionX = coordinates.x;
+      positionY = coordinates.y;
+      rectangleCoordinate[0]= positionX;
+      rectangleCoordinate[1]= positionY;
+
+    }
+    function rectangleMove(e){
+      var coordinates = getCoordinates(canvas, e);
+      rectangleCoordinate[2]=coordinates.x;
+      rectangleCoordinate[3]=coordinates.y;
+
+    }
+    function rectangleDraw(canvas){
+      var fillcolor = document.getElementById("myColor");
+
+      console.log(rectangleCoordinate);
+        var x1,y1,x2,y2;
+        x1=rectangleCoordinate[0];
+        y1=rectangleCoordinate[1];
+        x2=rectangleCoordinate[2];
+        y2=rectangleCoordinate[3];
+     // ctx.beginPath();
+     // ctx.strokeRect(x1,y1,x2-x1,y2-y1);
+      ctx.fillStyle =fillcolor.value;
+      ctx.fillRect(x1,y1,x2-x1,y2-y1);
+
+    }
+    function rectangleUp(){
+      mouse = false;
+
+      rectangleDraw(canvas);
+      // canvas.removeEventListener("mousedown", rectangleDown, false);
+      // canvas.removeEventListener("mousemove", rectangleMove, false);
+      // canvas.removeEventListener("mouseup", rectangleUp, false);
+      canvas.style.cursor = "default";
+    }
+    function clear() {
+      canvas.removeEventListener("mousedown", rectangleDown, false);
+      canvas.removeEventListener("mousemove", rectangleMove, false);
+      canvas.removeEventListener("mouseup", rectangleUp, false);
+      canvas.removeEventListener("mousedown", brushDown, false);
+      canvas.removeEventListener("mousemove", brushMove, false);
+      canvas.removeEventListener("mouseup", brushUp, false);
+    }
+
     function brushUp() {
       mouse = false;
       canvas.style.cursor = "default";
+      // canvas.removeEventListener("mousedown", brushDown, false);
+      // canvas.removeEventListener("mousemove", brushMove, false);
+      // canvas.removeEventListener("mouseup", brushUp, false);
     }
 
     function brushClick() {
@@ -103,15 +163,26 @@ export class DrawComponent implements OnInit {
       ctx.strokeStyle = brushColor.value;
       brush.style.border = "2px solid red";
       eraser.style.border = "none";
-
+      clear();
       canvas.addEventListener("mousedown", brushDown, false); //bubble phase
       canvas.addEventListener("mousemove", brushMove, false);
       canvas.addEventListener("mouseup", brushUp, false);
     }
+    function rectangleClick() {
+      brush.style.border = "none";
+      eraser.style.border = "none";
+      var rectangle = document.getElementById("rectangle");
+      clear();
+      canvas.addEventListener("mousedown", rectangleDown, false);
+      canvas.addEventListener("mousemove", rectangleMove, false);
+      canvas.addEventListener("mouseup", rectangleUp, false);
+    }
 
 //3. Making the eraser work
     function eraserClick() {
-      ctx.strokeStyle = "white";
+      var eraserColor = document.getElementById("myColor2");
+
+      ctx.strokeStyle = eraserColor.value;
       eraser.style.border = "2px solid red";
       brush.style.border = "none";
 
@@ -122,7 +193,8 @@ export class DrawComponent implements OnInit {
 
 //6. Making the reset button work
     function resetClick() {
-      window.location.reload();
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      // window.location.reload();
     }
 
 //7. Making the save button work
@@ -135,8 +207,10 @@ export class DrawComponent implements OnInit {
 
 //Event Listeners for tools
     brush.addEventListener("click", brushClick); //Brush click event
+    rectangle.addEventListener("click", rectangleClick);//Rectangle click event
     eraser.addEventListener("click", eraserClick); //Eraser click event
     color.addEventListener("change", colorChange); //Color change event
+    color2.addEventListener("change",colorChange2);//Eraser color change event
     size.addEventListener("change", sizeChange); //Size change event
     reset.addEventListener("click", resetClick); //Reset click event
     saveLink.addEventListener("click", saveClick); //Save click event
@@ -180,6 +254,7 @@ export class DrawComponent implements OnInit {
       }, true);
     }
 
+    canvas.dispatchEvent();
   }
 
 
