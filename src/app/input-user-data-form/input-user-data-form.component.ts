@@ -18,8 +18,9 @@ export class InputUserDataFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router)
   {
-    this.http.get('/api/v1/generate_uid').subscribe((data:any) => {
+    this.http.get('http://localhost:3000/api/v1/generate_uid').subscribe((data:any) => {
       this.guid = data.guid;
+      console.log(this.guid);
     }, error => {
       console.log("There was an error generating the proper GUID on the server", error);
     });
@@ -72,10 +73,13 @@ export class InputUserDataFormComponent implements OnInit {
     else
     {
       let data: any = Object.assign({guid: this.guid}, this.userForm.value);
+      data.uid = this.guid;
 
-      this.http.post('/api/v1/user', data).subscribe((data:any) => {
+      this.http.post('http://localhost:3000/', data).subscribe((data:any) => {
+            // this.http.
+        //let path = 'http://localhost:3000/user/' + data.user.uid;
+        let path = 'http://localhost:3000';
 
-        let path = '/user/' + data.user.uid;
 
         this.router.navigate([path]);
       }, error =>

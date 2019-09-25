@@ -12,8 +12,11 @@ router.get('/', async function(req,res,next){
 
 //Adds a new user to the list
 router.post('/',async (req,res,next) =>{
+
   const body = req.body;
+  console.log(body);
   try{
+
     const user = await UserService.create(body);
     if(body.guid != null){
       res.cookie('guid',user.guid,{maxAge:900000,httpOnly:true});
@@ -34,10 +37,11 @@ router.post('/',async (req,res,next) =>{
   }
 });
 //get
-router.get('/:id',async (req,res,next)=>
+router.get('/:uid',async (req,res,next)=>
 {
   try {
     const user = await UserService.retrive(req.params.id);
+    return user;
   }
   catch( err) {
     return next(err);

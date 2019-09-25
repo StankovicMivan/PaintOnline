@@ -50,7 +50,7 @@ class UserService
       };
     }
 
-    let customer = new user(data.first_name, data.last_name, data.email, data.zipcode, data.password);
+    let customer = new user(data.uid, data.first_name, data.last_name, data.email, data.zipcode, data.password);
 
     customer.uid = 'c' + counter++;
 
@@ -71,7 +71,7 @@ class UserService
     }
   }
   static all(){
-    return customers["c123"];
+    return customers;
   }
 
   static update(uid, data)
@@ -101,11 +101,11 @@ class UserService
   }
 
 }
-let korisnik =new user("123","ivan","stankovic","ivanjoca@gmail.com","12345","koliko21");
+// let korisnik =new user("123","ivan","stankovic","ivanjoca@gmail.com","12345","koliko21");
 
-console.log(korisnik)
-customers["c123"] = korisnik;
-// console.log(customers["c1"]);
-// UserService.create(korisnik);
-counter ++;
+// console.log(korisnik)
+// customers["c123"] = korisnik;
+// // console.log(customers["c1"]);
+// // UserService.create(korisnik);
+// counter ++;
 module.exports = UserService;

@@ -11,7 +11,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 const routes: Routes = [
   { path: 'draw', component: DrawComponent },
   {path:'', component: InputUserDataFormComponent},
-  {path:'users/:uid', component:DisplayUserDataComponent}
+  {path:'user/:uid', component:DisplayUserDataComponent}
 
 
 ];

@@ -15,10 +15,20 @@ export class DisplayUserDataComponent implements OnInit{
     zipcode: 10283,
     password: "Idasn2x2#"});
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit()
   {
-
+    // this.http.get('/:id',async (req,res,next)=>
+    // {
+    //   try {
+    //     const user = await UserService.retrive(req.params.id);
+    //   }
+    //   catch( err) {
+    //     return next(err);
+    //   }
+    // });
   }
 }

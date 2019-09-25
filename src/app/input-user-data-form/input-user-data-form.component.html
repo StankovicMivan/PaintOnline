@@ -1,6 +1,8 @@
 <legend>Register User</legend>
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-
+<div>
+  <input type="text" id="uid" value="{{guid}}">
+</div>
   <div class="form-group" [ngClass]="{ 'has-error': invalidFirstName() }"> <!-- First Name -->
     <label for="first_name" class="control-label">First Name</label>
     <input type="text" formControlName="first_name" class="form-control" id="first_name" name="first_name" placeholder="Martin">
