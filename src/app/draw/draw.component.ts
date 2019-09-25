@@ -254,7 +254,7 @@ export class DrawComponent implements OnInit {
       }, true);
     }
 
-    canvas.dispatchEvent();
+    // canvas.dispatchEvent();
   }
 
 
